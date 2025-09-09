@@ -1,0 +1,52 @@
+<mat-card appearance="outlined" class="Conversation">
+  <mat-card-header>
+    <mat-card-title>{{ receiverName() }}</mat-card-title>
+    <mat-card-subtitle>Status</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div
+      #messagesContainer
+      style="
+        max-height: 60vh;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      "
+    >
+      <ng-content> </ng-content>
+      @for (message of conversation()?.messages; track message) {
+        <p
+          [ngClass]="
+            message.senderId !== senderId
+              ? 'Conversation-Message'
+              : 'Conversation-Message Conversation-Message--response'
+          "
+        >
+          {{ message.content }}
+        </p>
+      }
+    </div>
+
+    <!--
+    <p class="Conversation-Message Conversation-Message--response">
+      The Shiba Inu is the smallest of the six original and distinct spitz
+      breeds of dog from Japan. A small, agile dog that copes very well with
+      mountainous terrain, the Shiba Inu was originally bred for hunting.
+    </p> -->
+  </mat-card-content>
+  <mat-card-actions>
+    <form [formGroup]="formGroup" (ngSubmit)="sendMessage(formGroup)">
+      <mat-form-field class="Conversation-Input">
+        <input
+          matInput
+          placeholder="Type a message..."
+          formControlName="message"
+        />
+      </mat-form-field>
+      <button mat-fab aria-label="Example icon button with a delete icon">
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </mat-card-actions>
+</mat-card>

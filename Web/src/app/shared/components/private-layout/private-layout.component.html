@@ -1,0 +1,14 @@
+<div class="PrivateLayout">
+  <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" #drawer opened>
+      <!-- Sidebar -->
+      <a routerLink="/app"><h1>Chat Flow</h1></a>
+      <app-contacts />
+      <app-user-card />
+    </mat-drawer>
+    <mat-drawer-content>
+      <button type="button" mat-button (click)="drawer.toggle()">XX</button>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

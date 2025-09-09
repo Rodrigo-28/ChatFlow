@@ -1,0 +1,24 @@
+<div class="Home">
+  <mat-card appearance="outlined" class="Home__card">
+    <mat-card-content>
+      <h1>ChatFlow</h1>
+      <p>Welcome again</p>
+      <p>
+        <mat-button-toggle-group
+          name="fontStyle"
+          aria-label="Font Style"
+          (change)="changeTab($event)"
+          [value]="tab"
+        >
+          <mat-button-toggle value="login">Login</mat-button-toggle>
+          <mat-button-toggle value="register">Register</mat-button-toggle>
+        </mat-button-toggle-group>
+      </p>
+      @if (tab === 'login') {
+        <app-login-form />
+      } @else {
+        <app-register-form />
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

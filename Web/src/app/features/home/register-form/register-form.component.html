@@ -1,0 +1,48 @@
+<form
+  class="RegisterForm"
+  [formGroup]="formGroup"
+  (ngSubmit)="submit(formGroup)"
+>
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      placeholder="Email"
+      type="email"
+      formControlName="email"
+      class="custominput"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Username</mat-label>
+    <input
+      matInput
+      placeholder="Username"
+      type="text"
+      formControlName="username"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      placeholder="Password"
+      type="password"
+      formControlName="password"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Confirm password</mat-label>
+    <input
+      matInput
+      placeholder="Confirm password"
+      type="password"
+      formControlName="confirmPassword"
+    />
+  </mat-form-field>
+
+  <button mat-flat-button type="submit">Submit</button>
+</form>

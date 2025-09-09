@@ -1,0 +1,12 @@
+<mat-list class="Contacts">
+  <div mat-subheader class="Contacts-Title">Contacts</div>
+  @for (user of users; track user) {
+    <mat-list-item
+      class="Contacts-Item Contacts-Item--active"
+      (click)="openChat(user.id)"
+    >
+      <mat-icon matListItemIcon>person</mat-icon>
+      <div matListItemTitle>{{ user.username }}</div>
+    </mat-list-item>
+  }
+</mat-list>

@@ -1,0 +1,21 @@
+.Contacts {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  &-Title {
+    font-weight: 500;
+  }
+  &-Item {
+    border-radius: 1rem;
+    &:hover {
+      cursor: pointer;
+      background-color: #f1f1f1;
+    }
+    &--active {
+      //   background-color: #ebebeb;
+    }
+  }
+}

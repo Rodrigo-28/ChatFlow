@@ -1,0 +1,12 @@
+.Home {
+  min-height: 100vh;
+  background-color: #d4d4d4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__card {
+    background-color: white;
+    width: 50%;
+    min-height: 360px;
+  }
+}

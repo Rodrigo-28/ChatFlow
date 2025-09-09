@@ -1,0 +1,29 @@
+.PrivateLayout {
+  background-color: #ccc;
+  min-height: 100vh;
+  mat-drawer-container {
+    min-height: 100vh;
+    position: relative;
+    mat-drawer {
+      background-color: #95cae2;
+      padding: 2rem;
+
+      min-height: 100vh;
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      app-user-card {
+        position: absolute;
+        width: 280px;
+        bottom: 1rem;
+      }
+    }
+
+    mat-drawer-content {
+      padding: 2rem;
+      max-height: 100vh;
+      overflow-y: scroll;
+    }
+  }
+}

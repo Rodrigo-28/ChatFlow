@@ -1,0 +1,10 @@
+<h1>Chat</h1>
+@if (body) {
+  <app-conversation
+    [receiverName]="body.receiverName"
+    [conversation]="body.conversation"
+    (sendNewMessage)="createMessage($event)"
+  />
+} @else {
+  <p>Loading conversation...</p>
+}
