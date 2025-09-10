@@ -18,24 +18,15 @@ namespace ChatFlow.Controllers
         }
 
         [HttpPost("login")]
-        //[ValidateDto(typeof(LoginRequestDto))]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto userDto)
         {
-            //var validationResult = await validator.ValidateAsync(userDto);
-            //if (!validationResult.IsValid)
-            //{
-            //    throw new BadRequestException(validationResult.ToString())
-            //    {
-            //        ErrorCode = "004"
-            //    };
-            //}
+
 
             var token = await _authService.Login(userDto);
 
             return Ok(token);
         }
         [HttpPost("register")]
-        //[ValidateDto(typeof(LoginRequestDto))]
         public async Task<IActionResult> Register([FromBody] RegisterDto body)
         {
 

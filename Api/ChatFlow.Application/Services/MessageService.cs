@@ -39,9 +39,7 @@ namespace ChatFlow.Application.Services
                 };
             }
 
-            // 2. Verificar que exista la conversación, si no existe crearla.
-            //var conversation = await _conversationService.GetOneOrCreate
-            //(senderId, body.ReceiverId);
+
 
             // 3. Crear el mensaje
             Message newMessage = new Message

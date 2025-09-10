@@ -30,14 +30,6 @@ namespace ChatFlow.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateUserDto userDto)
         {
-            //var validationResult = await validator.ValidateAsync(userDto);
-            //if (!validationResult.IsValid)
-            //{
-            //    throw new BadRequestException(validationResult.ToString())
-            //    {
-            //        ErrorCode = "004"
-            //    };
-            //}
 
 
             var user = await _userService.Create(userDto);
@@ -61,8 +53,7 @@ namespace ChatFlow.Controllers
             }
             catch (Exception ex)
             {
-                // Handle errors (e.g., API rate limit, network issues)
-                // Log the error if needed
+
                 return "Unknown";
             }
         }
