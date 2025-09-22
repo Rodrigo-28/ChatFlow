@@ -8,5 +8,8 @@ namespace ChatFlow.Application.Interfaces
         public Task<LoginResponseDto> Login(LoginRequestDto userDto);
         public Task<UserResponseDto> Register(RegisterDto body);
         public Task<CurrentUserResponseDto> GetMe(Guid senderId);
+        Task<LoginResponseDto> RefreshAsync(RefreshTokenRequestDto body);
+        Task<GenericResponseDto> LogoutAsync(RefreshTokenRequestDto body); // este dispositivo
+        Task<GenericResponseDto> LogoutAllAsync(Guid userId);
     }
 }

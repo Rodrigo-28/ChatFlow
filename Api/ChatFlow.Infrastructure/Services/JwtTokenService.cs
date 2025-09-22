@@ -34,14 +34,16 @@ namespace ChatFlow.Infrastructure.Services
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     //Unique identifier of the token, typically a GUID
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), //JWT ID
-                    new Claim(ClaimTypes.Role, Enum.GetName(typeof(UserRole), user.RoleId))
+                    new Claim(ClaimTypes.Role, Enum.GetName(typeof(UserRole), user.RoleId)),
+                       new Claim("ver", user.TokenVersion.ToString())
             };
 
             var token = new JwtSecurityToken(
              issuer: _configuration["Jwt:Issuer"],  //Specifies entity issuing the token
              audience: _configuration["Jwt:Audience"], //Speficies the recipient of the token
              claims: claims,
-             expires: DateTime.Now.AddMinutes(30),
+           notBefore: DateTime.UtcNow,                   // opcional, pero prolijo
+                expires: DateTime.UtcNow.AddMinutes(30),      // access token ~30 min
              signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

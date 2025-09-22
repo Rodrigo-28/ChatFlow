@@ -8,6 +8,7 @@ namespace ChatFlow.Infrastructure.Contexts
     {
 
         public DbSet<User> Users { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<Conversation> Conversation { get; set; }
         public DbSet<Message> Message { get; set; }
@@ -45,18 +46,7 @@ namespace ChatFlow.Infrastructure.Contexts
             //.OnDelete(DeleteBehavior.Cascade); // Elimina las conversaciones si se elimina el usuario
 
 
-            //    // Configurar relaciones de Conversation a Message
-            //    modelBuilder.Entity<Message>()
-            //        .HasOne(m => m.Conversation) // Un Message pertenece a una Conversation
-            //        .WithMany(c => c.Messages)
-            //        .HasForeignKey(m => m.ConversationId)
-            //        .OnDelete(DeleteBehavior.Cascade); // Elimina los mensajes si se elimina la conversación
 
-            //    // Configurar relaciones de User a Message
-            //    modelBuilder.Entity<Message>()
-            //        .HasOne(m => m.Sender) // Un Message es enviado por un User
-            //        .WithMany(u => u.Messages);
-            //}
             modelBuilder.Entity<Profile>()
                 .HasKey(p => p.UserId);
             modelBuilder.Entity<Profile>()
@@ -68,6 +58,17 @@ namespace ChatFlow.Infrastructure.Contexts
                 .HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Username).IsUnique();
+            modelBuilder.Entity<RefreshToken>()
+                      .HasIndex(rt => rt.TokenHash)
+                      .IsUnique();
+
+            modelBuilder.Entity<RefreshToken>()
+                .HasIndex(rt => rt.UserId);
+            modelBuilder.Entity<RefreshToken>()
+    .HasOne(rt => rt.User)
+    .WithMany(u => u.RefreshTokens)
+    .HasForeignKey(rt => rt.UserId)
+    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

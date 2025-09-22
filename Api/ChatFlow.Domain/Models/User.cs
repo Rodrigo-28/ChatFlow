@@ -28,13 +28,19 @@ namespace ChatFlow.Domain.Models
 
         [Column("role_id")]
         public int RoleId { get; set; }
+        [Column("token_version")]
+        public int TokenVersion { get; set; } = 0;
         public Role Role { get; set; } // Role (e.g., User, Admin)
         public Profile Profile { get; set; }
+        // ← NUEVO: versión de tokens para “token versioning”
 
 
 
         public ICollection<Conversation> Conversations { get; set; } // List of conversations
 
         public ICollection<Message> Messages { get; set; } // List of messages sent by the user
+
+        // Navegación (ver entidad de abajo)
+        public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
     }
 }

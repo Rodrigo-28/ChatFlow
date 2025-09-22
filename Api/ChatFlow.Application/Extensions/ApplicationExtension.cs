@@ -12,6 +12,7 @@ namespace ChatFlow.Application.Extensions
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IMessageService, MessageService>();
             services.AddTransient<IConversationService, ConversationService>();
+            services.AddScoped<IRefreshTokenService, RefreshTokenService>();
 
             services.AddSingleton<WebSocketHandler>();
 

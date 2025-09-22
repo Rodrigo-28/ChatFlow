@@ -10,14 +10,19 @@ namespace ChatFlow.Infrastructure.Extensions
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
             // Repositories
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IMessageRepository, MessageRepository>();
-            services.AddTransient<IConversationRepository, ConversationRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IConversationRepository, ConversationRepository>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+
 
             // Other services
             services.AddSingleton<IPasswordEncryptionService, PasswordEncryptionService>();
             services.AddSingleton<IJwtTokenService, JwtTokenService>();
+            services.AddSingleton<IRefreshTokenProvider, RefreshTokenProvider>();
+
             return services;
         }
     }
+    //EF Core registra ApplicationDbContext como Scoped; por consistencia, los repos también en Scoped.
 }
