@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { ChatComponent } from './pages/chat/chat.component';
 import { HomeComponent } from './pages/home/home.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { DebugAuthComponentComponent } from './shared/components/debug-auth-component/debug-auth-component.component';
 import { PrivateLayoutComponent } from './shared/components/private-layout/private-layout.component';
 import { AuthGuard } from './shared/services/auth.guard';
 
@@ -15,6 +16,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: WelcomeComponent },
       { path: 'chat/:id', component: ChatComponent },
+      { path: 'debug-auth', component: DebugAuthComponentComponent },
     ],
   },
 ];

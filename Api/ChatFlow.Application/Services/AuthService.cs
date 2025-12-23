@@ -51,11 +51,11 @@ namespace ChatFlow.Application.Services
 
             // 3) Emitir par de tokens (access + refresh) y persistir el refresh (hash) en DB
             var pair = await _refreshTokenService.IssueOnLoginAsync(user);
-            // 4) Devolver en el mismo DTO de siempre (compatibilidad con el front)
+
             return new LoginResponseDto
             {
-                Token = pair.Token,                  // access token (JWT)
-                RefreshToken = pair.RefreshToken     // refresh token (valor plano)
+                Token = pair.Token,
+                RefreshToken = pair.RefreshToken
             };
         }
 

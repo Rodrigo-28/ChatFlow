@@ -17,6 +17,7 @@ import { concatMap, Subject, tap } from 'rxjs';
 import { ErrorModalComponent } from '../../../shared/components/error-modal/error-modal.component';
 import { AuthService } from '../../../shared/services/auth.service';
 import { CacheService } from '../../../shared/services/cache.service';
+import { TokenService } from '../../../shared/services/token.service';
 import { matchPasswordsValidator } from '../../../shared/validators/match-passwords.validator';
 
 @Component({
@@ -44,6 +45,7 @@ export class RegisterFormComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private auth = inject(AuthService);
   private cache = inject(CacheService);
+  private tokens = inject(TokenService);
 
   private destroy$ = new Subject<void>();
   formGroup!: FormGroup;
@@ -79,7 +81,16 @@ export class RegisterFormComponent implements OnInit, OnDestroy {
       .register({ email, username, password })
       .pipe(
         concatMap(() => this.auth.login({ email, password })),
-        tap((loginRes) => localStorage.setItem('token', loginRes.token)),
+        tap((loginRes) => {
+          this.tokens.accessToken = loginRes.token;
+          this.tokens.refreshToken = loginRes.refreshToken;
+        }),
+        concatMap(() => this.auth.getMe()),
+        tap((me) => {
+          this.cache.setItem('senderId', me.senderId);
+          this.cache.setItem('senderName', me.senderName);
+        
+        }),
       )
       .subscribe({
         next: () => this.router.navigate(['/app']),

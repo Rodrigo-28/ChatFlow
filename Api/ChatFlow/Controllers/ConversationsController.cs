@@ -1,5 +1,6 @@
 ﻿using ChatFlow.Application.Interfaces;
 using ChatFlow.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChatFlow.Controllers
@@ -14,13 +15,13 @@ namespace ChatFlow.Controllers
         {
             _conversationService = conversationService;
         }
-
+        [Authorize]
         [HttpGet("{receiverId}")]
         public async Task<IActionResult> GetConversation(Guid receiverId)
         {
             var senderId = UserHelper.GetUserId(User);
-                
-            
+
+
             var conversation = await _conversationService.GetOneOrCreate(receiverId, senderId);
 
             return Ok(conversation);

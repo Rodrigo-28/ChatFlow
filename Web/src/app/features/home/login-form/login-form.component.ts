@@ -15,6 +15,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { ErrorModalComponent } from '../../../shared/components/error-modal/error-modal.component';
 import { LoginRequest } from '../../../shared/interfaces/login-request.interface';
 import { AuthService } from '../../../shared/services/auth.service';
+import { TokenService } from '../../../shared/services/token.service';
 
 @Component({
   selector: 'app-login-form',
@@ -35,6 +36,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private authService = inject(AuthService);
+  private tokenService = inject(TokenService);
 
   formGroup!: FormGroup;
   ngOnInit(): void {
@@ -60,6 +62,9 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (response) => {
             console.log('JWT:', response.token);
+            console.log('refresh', response.refreshToken);
+            this.tokenService.accessToken = response.token; // <-- guarda el JWT
+            this.tokenService.refreshToken = response.refreshToken;
             localStorage.setItem('token', response.token);
             this.router.navigate(['/app']);
           },

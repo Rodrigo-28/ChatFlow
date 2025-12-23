@@ -29,7 +29,8 @@ namespace ChatFlow.Infrastructure.Services
             {
                 //Identifies the principal (User) that is the subject of the JWT
                     new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()), //Sub (subject)
-
+                      new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // 👈 agrega esto
+                     new Claim("Id", user.Id.ToString()),                      // 👈 o este si tu código lo usa
                 //User Email
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     //Unique identifier of the token, typically a GUID
@@ -43,7 +44,7 @@ namespace ChatFlow.Infrastructure.Services
              audience: _configuration["Jwt:Audience"], //Speficies the recipient of the token
              claims: claims,
            notBefore: DateTime.UtcNow,                   // opcional, pero prolijo
-                expires: DateTime.UtcNow.AddMinutes(30),      // access token ~30 min
+                expires: DateTime.UtcNow.AddSeconds(20),      // access token ~30 min
              signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

@@ -1,6 +1,7 @@
 ﻿using ChatFlow.Application.DTOs.Requests;
 using ChatFlow.Application.Interfaces;
 using ChatFlow.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChatFlow.Controllers
@@ -14,6 +15,7 @@ namespace ChatFlow.Controllers
         {
             _messageService = messageService;
         }
+        [Authorize]
         [HttpPost("send")]
         public async Task<IActionResult> SendMessage([FromBody] SendMessageDto body)
         {

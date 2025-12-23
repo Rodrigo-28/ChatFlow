@@ -32,7 +32,7 @@ namespace ChatFlow.Extensions
                             Encoding.UTF8.GetBytes(config["Jwt:Key"]!)
                         ),
                         ValidateLifetime = true,
-                        ClockSkew = TimeSpan.FromSeconds(30) // pequeña tolerancia
+                        ClockSkew = TimeSpan.FromSeconds(5) // pequeña tolerancia
                     };
 
                     // Validación extra: token versioning ("ver")

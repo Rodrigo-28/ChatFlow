@@ -43,14 +43,14 @@ namespace ChatFlow.Controllers
             return Ok(response);
         }
         [HttpPost("refresh")]
-        [AllowAnonymous] // importante: no exige access token vigente
+        [AllowAnonymous]
         public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequestDto body)
         {
             var result = await _authService.RefreshAsync(body);
             return Ok(result); // { token, refreshToken }
         }
         [HttpPost("logout")]
-        [AllowAnonymous] // se valida por refresh token, no por access token
+        [AllowAnonymous]
         public async Task<IActionResult> Logout([FromBody] RefreshTokenRequestDto body)
         {
             var result = await _authService.LogoutAsync(body);
@@ -60,9 +60,9 @@ namespace ChatFlow.Controllers
         [Authorize] // requiere access token válido
         public async Task<IActionResult> LogoutAll()
         {
-            var userId = UserHelper.GetUserId(User); // ya lo usás en /auth/me
+            var userId = UserHelper.GetUserId(User);
             var result = await _authService.LogoutAllAsync(userId);
-            return Ok(result); // { success: true }
+            return Ok(result);
         }
     }
 }
